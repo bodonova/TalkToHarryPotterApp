@@ -1,0 +1,58 @@
+{
+  "name": "TalkToHarryApp",
+  "version": "0.0.1",
+  "description": "A sample browser application for Bluemix that use the speech-to-text, conversation, and text-to-speech services to interact with out Harry Potter Q&A conversation serice sample",
+  "dependencies": {
+    "body-parser": "*",
+    "connect": "*",
+    "errorhandler": "*",
+    "express": "*",
+    "harmon": "*",
+    "http-proxy": "*",
+    "transformer-proxy": "*",
+    "watson-developer-cloud": "*"
+  },
+  "engines": {
+    "node": "6.11.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.ng.bluemix.net/brian_odonovan/harry-potter-speech-to-speech-app",
+    "old_url": "https://github.com/leonrch/SpeechToSpeech"
+  },
+  "author": "IBM Corp.",
+  "browserify-shim": {
+    "jquery": "global:jQuery"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "contributors": [
+    {
+      "name": "Leonid Rachevsky",
+      "email": "rachevsk@us.ibm.com"
+    },
+    {
+      "name": "Rachel N. White",
+      "email": "whiter@us.ibm.com"
+    },
+    {
+      "name": "Brian O'Donovan",
+      "email": "brian_odonovan@ie.ibm.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "bugs": {},
+  "scripts": {
+    "start": "node --harmony app.js",
+    "build": "browserify -o public/js/main.js src/index.js",
+    "watch": "watchify -v -d -o public/js/main.js src/index.js"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "browserify-shim": "*",
+    "watchify": "*"
+  }
+}

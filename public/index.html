@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Speak to Harry Demo</title>
+    <link href="css/watson-bootstrap-style.css" rel="stylesheet">
+    <link href="css/browser-compatibility.css" rel="stylesheet">
+    <link href="css/demo-stt.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/clipart-harry-potter.jpg"> <!-- was favicon.png -->
+  </head>
+  <body>
+    <!-- top nav section -->
+
+    <!-- Service Description Bar -->
+    <!-- Step 1 Section-->
+	<div class="container">
+	    <div class="col-lg-12 col-md-12 col-xs-12 main-header">
+          <h1>Speak to Harry Demo</h1>
+        </div>
+	  <!-- Step 3 Section-->
+	  <!-- First column of inputs -->
+	  <div class="row">
+	  	<div class="col-lg-12 col-md-12 col-sm-12 intro-copy">
+	  		<div class="col-lg-10 col-lg-push-1 col-md-12 col-sm-12">
+					<p class="help-block">Ask a question about Harry Potter. You can use your microphone,
+            upload pre-recorded audio file (uncompressed 16 KHz mono WAV or FLAC), drag and drop selected audio file onto the page
+            or try the audio samples provided.
+            <br />
+					<a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/">Built with IBM Watson</a>
+					 |
+					<a href="http://www.ibm.com/privacy/us/en/">Terms and Privacy Policy</a>
+					 |
+					<!-- a href="https://github.com/leonrch/SpeechToSpeech">Fork me on Github</a -->
+	  	</div>
+	  </div>
+
+		<div class="row">
+		  <div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="audioParent">
+			  <audio style="display:none" class="audio" controls>
+				Your browser does not support the audio element.
+			  </audio>
+			</div>
+		  </div>
+		</div><!-- row -->
+
+
+		<div class="row">
+		  <nav class="navbar navbar-inverse">
+			  <ul class="navbar-text">
+					<li id="recordButton" class="button-row nav-inverse-color">
+						<img id="microphoneIcon" src="images/microphone.svg" class="icon">
+						<span class="nav-label">Record Audio</span>
+					</li>
+					<li class="file-upload button-row nav-inverse-color">
+						<div id="fileUploadTarget">
+						  <img src="images/upload.svg" class="icon"></img>
+						  <span class="nav-label">Select File</span>
+						</div>
+					</li>
+			  </ul>
+		  </nav>
+		</div>
+		<div class="row">
+			<nav class="navbar navbar-inverse navbar-secondary">
+				<ul class="navbar-text">
+          <li class="play-sample-1 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Ask about scars</span>
+					</li>
+					<li class="play-sample-2 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Ask about the golden ball</span>
+					</li>
+          <li class="play-sample-3 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Ask about the four houses</span>
+					</li>
+					<li class="play-sample-4 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Ask about Harry's age</span>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Tab panes -->
+		<div class="row" style="  margin: 0;">
+		  <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+			<div class="well">
+			  <form autocomplete="off" class="form-horizontal">
+				<div role="tabpanel">
+
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Question</a></li>
+					<!-- <li role="presentation"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">JSON</a></li> -->
+				  </ul>
+
+				  <div class="hr-tab"></div>
+
+				  <fieldset>
+
+					<div class="row error-row">
+					  <div class="col-lg-12">
+						<div id="errorAlert" >
+						  <span id="errorMessage"></span>
+						  <a class="pull-right" href="#" id="errorClose">&times;</a>
+						</div>
+					  </div>
+					</div>
+
+					<div class="row notification-row">
+					  <div class="col-lg-12">
+						<div id="notificationAlert" >
+						  <span id="notificationMessage"></span>
+						  <a class="pull-right" href="#" id="notificationClose">&times;</a>
+						</div>
+					  </div>
+					</div>
+
+
+					<div class="form-group row tabpanel-row">
+					  <div class="col-lg-12">
+						<div class="tab-content">
+						  <div role="tabpanel" class="tab-pane active" id="home2">
+                <!--textarea readonly id="resultsText"></textarea -->
+                <textarea id="resultsText"></textarea>
+						  </div>
+						</div>
+					  </div><!-- .col-lg-12 -->
+					</div>
+				  </fieldset>
+				</div>
+			  </form>
+			</div>
+		  </div><!-- /.well -->
+		</div><!-- /.tabpanel -->
+
+
+		<div class="well">
+			<div role="tabpanel">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Answer</a></li>
+				</ul>
+				<div class="hr-tab"></div>
+				<fieldset>
+					<div class="col-lg-12">
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="translation">
+								<textarea readonly></textarea>
+							</div>
+							<button id="playTTS">
+								<span>&#9654;</span>
+							</button>
+							<button id="stopTTS">
+								<span>&#x025FC;</span>
+							</button>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+		<audio class="audio-tts" style="display:none">
+			Your browser does not support the audio element.
+		</audio>
+
+	  </div><!-- /.container -->
+
+      </div>
+      <!-- for file upload dialog in toolbar -->
+      <input style="display:none" type="file" id="fileUploadDialog">
+
+      <!-- Place js files at the end of the document, with fallbacks for CDNs -->
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/jquery-1.11.3.min.js"><\/script>')</script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script> (typeof $().emulateTransitionEnd == 'function')|| document.write('<script src="js/bootstrap-3.3.5.min.js"><\/script>')</script>
+      <script>
+        var div = document.getElementById('langSelDiv');
+        // hide
+        div.style.visibility = 'hidden';
+        div.display = false;
+      </script>
+      <script src="js/main.js"></script>
+
+  </body>
+</html>
