@@ -1,13 +1,13 @@
-# SpeechToSpeech
-# Speech to Speech Browser Application
+# SpeakToHarryPotterApp
+# Speak to Harry Potter Application
 
-  The application uses IBM's speech recognition, machine translation, and voice synthesis capabilities to instantly translate speech to another language and read the translation aloud.
-  
+  The application uses IBM's speech recognition and voice synthesis capabilities to provide a convenient interface to a Harry Potter related conversation service.
+
 Node.js is used to provide the browser client's authentication token.
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/leonrch/SpeechToSpeech)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/bodonova/TalkToHarryPotterApp)
 
 ## Getting Started
 
@@ -21,26 +21,23 @@ Give it a try! Click the button below to fork into IBM DevOps Services and deplo
   ```none
 ---
 declared-services:
-  speech-to-text-service-standard:
-    label: speech_to_text
-    plan: standard
-  language-translation-service:
-    label: language_translation
-    plan: standard
-  text-to-speech-service:
-    label: text_to_speech
-    plan: standard	
-applications:
-- name: <application name>
-  command: node app.js
-  buildpack: sdk-for-nodejs
-  path: .
-  memory: 256m
-  services:
-  - speech-to-text-service-standard
-  - language-translation-service
-  - text-to-speech-service
-  ```
+    speech-to-text-service-standard:
+      label: speech_to_text
+      plan: standard
+    text-to-speech-service:
+      label: text_to_speech
+      plan: standard
+  applications:
+  - name: <application name>
+    command: node --harmony app.js
+    buildpack: sdk-for-nodejs
+    path: .
+    memory: 256m
+    services:
+    - speech-to-text-service-standard
+    - text-to-speech-service
+```
+
   The name you use will determinate your application url initially, e.g. `<application-name>.mybluemix.net`.
 
 4. Install [Node.js](http://nodejs.org/)
