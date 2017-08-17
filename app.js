@@ -24,7 +24,7 @@ var express = require('express'),
     bluemix = require('./config/bluemix'),
     watson = require('watson-developer-cloud'),
     //wconv = require ('./potter/node_modules/watson-developer-cloud/conversation/v1.js'),
-    ah = require ('./potter/AskHarry'),
+    //ah = require ('./potter/AskHarry'),
     path = require('path'),
     // environmental variable points to demo's json config file
     extend = require('util')._extend;
@@ -95,15 +95,59 @@ app.get('/synthesize', function(req, res) {
 });
 
 // -------------------------------- Conversation ---------------------------------
-app.get('/api/conversation', function(req, res) {
-  console.log ('handling a get request for conversation service');
-  console.log ('Called conversation with req: '+req.query.question);
-  //console.log(JSON.stringify(req, null, 3));
-  // ah.ask_harry(req.query.question, ah.got_answer);
-  // res.end('reply to your question: '+req.query.question);
-  // ToDo handle cases with no proper question in the request
-  ah.message(req.query.question, res);
+
+
+app.get('/api/conversation', function(req, response) {
+  var harry_workspace_id =  process.env.WORKSPACE_ID || 'ac98ad6d-1dfd-4012-be01-4584d95b03aa';
+  var conversation = new watson.ConversationV1({
+    username: process.env.CONVERSATION_USERNAME || '163ecdf5-6197-401c-a2f4-819336362625',
+    password: process.env.CONVERSATION_PASSWORD || 'GXyFOWHdMcR5',
+    //version_date: watson.ConversationV1.VERSION_DATE_2017_01_26
+    version_date: '2016-09-20', // change version if needed
+    version: 'v1',
+  });
+  var text = req.query.question;
+  console.log ('Called conversation with quewstion: '+text);
+
+  var answer = 'No clear answer could be given';
+  var payload = {
+    workspace_id: harry_workspace_id,
+    input: {
+      text: text
+    },
+  };
+  response.setHeader('Content-Type', 'text/plain')
+
+  var replyPromise =
+  new Promise(function (resolve, reject) {
+    conversation.message(payload, function(err, data) {
+      if (err) {
+        console.log('Error: '+err);
+        response.status(500);
+        response.end ("The service failed with error "+err.message);
+        //reject(err);
+        resolve(err); // resolve because we already handled the error
+      } else {
+        response.status(200);
+        if (data.output.text.length >0) {
+          console.log ('got '+data.output.text.length+' answers: '+data.output.text[0]);
+          answer = data.output.text[0];
+          //console.log ('got JSON data with '+data.output.text.length+' text fields: '+answer);
+        } else {
+          // answer = JSON.stringify(data);
+          answer = 'No clear answer could be given for your question: '+req.query.question;
+          console.log ('Didn\'t get a good answer so sending '+answer);
+          //console.log ('something else: '+answer);
+        }
+        // TODO add proper response headers
+        response.end (answer);
+        resolve(answer);
+      }
+    })
+  });
+
 });
+
 
 
 

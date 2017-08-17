@@ -1464,7 +1464,7 @@ var effects = require('./effects');
 
 
 var LOOKUP_TABLE = {
-  'en-US_BroadbandModel': ['sample-scars.wav', 'sample-small-golden-ball.wav', 'sample-four-houses.wav', 'sample-what-age.wav'],
+  'en-US_BroadbandModel': ['sample-scars.wav', 'sample-small-golden-ball.wav', 'sample-four-houses.wav', 'sample-rubbish.wav'],
   'ar-AR_BroadbandModel': ['ar-AR_Broadband_sample1.wav', 'ar-AR_Broadband_sample2.wav'],
   'old-en-US_BroadbandModel': ['Us_English_Broadband_Sample_1.wav', 'Us_English_Broadband_Sample_2.wav'],
   'en-US_NarrowbandModel': ['Us_English_Narrowband_Sample_1.wav', 'Us_English_Narrowband_Sample_2.wav'],
